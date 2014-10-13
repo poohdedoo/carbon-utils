@@ -18,41 +18,62 @@ package org.wso2.carbon.logging.service.internal;
 import org.apache.axis2.context.ConfigurationContext;
 import org.wso2.carbon.registry.core.Registry;
 import org.wso2.carbon.user.core.service.RealmService;
+import org.wso2.carbon.databridge.agent.thrift.AgentHolder;
+import org.wso2.carbon.databridge.agent.thrift.Agent;
 
 public class DataHolder {
-    private static DataHolder dataHolder = new DataHolder();
-    private RealmService realmService;
-    private Registry registry;
-    private ConfigurationContext contextService;
+	private static DataHolder dataHolder = new DataHolder();
+	private RealmService realmService;
+	private Registry registry;
+	private ConfigurationContext contextService;
+	private Agent agent;
+	private boolean isAgentInitialized;
 
-    private DataHolder() {
-    }
+	public static DataHolder getInstance() {
+		return dataHolder;
+	}
 
-    public static DataHolder getInstance() {
-        return dataHolder;
-    }
+	private DataHolder() {
+	}
 
-    public RealmService getRealmService() {
-        return realmService;
-    }
+	public void setRealmService(RealmService realmService) {
+		this.realmService = realmService;
+	}
 
-    public void setRealmService(RealmService realmService) {
-        this.realmService = realmService;
-    }
+	public RealmService getRealmService() {
+		return realmService;
+	}
+	
+	public Agent getAgent() {
+		if (!isAgentInitialized && agent == null) {
+			synchronized (this) {
+				if (!isAgentInitialized && agent == null) {
+					agent = AgentHolder.getOrCreateAgent();
+					isAgentInitialized = true;
+				}
+			}
+		}
+		return agent;
+	}
 
-    public ConfigurationContext getServerConfigContext() {
-        return this.contextService;
-    }
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
 
-    public void setServerConfigContext(ConfigurationContext configContext) {
-        this.contextService = configContext;
-    }
 
-    public Registry getRegistry() {
-        return registry;
-    }
+	public void setServerConfigContext(ConfigurationContext configContext) {
+		this.contextService = configContext;
+	}
 
-    public void setRegistry(Registry registryParam) {
-        registry = registryParam;
-    }
+	public ConfigurationContext getServerConfigContext() {
+		return this.contextService;
+	}
+
+	public void setRegistry(Registry registryParam) {
+		registry = registryParam;
+	}
+
+	public Registry getRegistry() {
+		return registry;
+	}
 }

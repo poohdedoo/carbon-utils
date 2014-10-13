@@ -29,6 +29,8 @@ import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.user.core.tenant.TenantManager;
 import org.wso2.carbon.utils.CarbonUtils;
 import org.wso2.carbon.utils.ConfigurationContextService;
+import org.wso2.carbon.databridge.agent.thrift.Agent;
+
 
 import java.io.File;
 
@@ -46,6 +48,10 @@ import java.io.File;
  * interface="org.wso2.carbon.utils.ConfigurationContextService"
  * cardinality="1..1" policy="dynamic"  bind="setConfigurationContextService"
  * unbind="unsetConfigurationContextService"
+ * @scr.reference name="agentservice.component"
+ * interface="org.wso2.carbon.databridge.agent.thrift.Agent"
+ * cardinality="1..1" policy="dynamic"  bind="setAgent"
+ * unbind="unsetAgent"
  */
 public class LoggingServiceComponent {
     private static Log log = LogFactory.getLog(LoggingServiceComponent.class);
@@ -72,6 +78,14 @@ public class LoggingServiceComponent {
     public RealmService getRealmService() {
         return realmService;
     }
+    
+    protected void setAgent(Agent agent){
+        DataHolder.getInstance().setAgent(agent);
+     }
+
+     protected void unsetAgent(Agent agent){
+        DataHolder.getInstance().setAgent(null);
+     }
 
     protected void setRealmService(RealmService realmService) {
         LoggingServiceComponent.realmService = realmService;

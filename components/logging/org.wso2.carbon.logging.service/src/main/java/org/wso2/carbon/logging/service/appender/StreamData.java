@@ -16,29 +16,39 @@
 package org.wso2.carbon.logging.service.appender;
 
 public class StreamData {
-    private String streamId;
-    private String date;
+	private String streamId;
+	private String date;
+	private String streamDefName;
 
-    public StreamData(String streamId, String date) {
-        super();
-        this.streamId = streamId;
-        this.date = date;
-    }
+	public StreamData(String streamId, String date, String streamDefName) {
+		super();
+		this.streamId = streamId;
+		this.streamDefName = streamDefName;
+		this.date = date;
+	}
 
-    public String getStreamId() {
-        return streamId;
-    }
+	public String getStreamDefName() {
+		return streamDefName;
+	}
 
-    public void setStreamId(String streamId) {
-        this.streamId = streamId;
-    }
+	public void setStreamDefName(String streamDefName) {
+		this.streamDefName = streamDefName;
+	}
 
-    public String getDate() {
-        return date;
-    }
+	public String getStreamId() {
+		return streamId;
+	}
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+	public void setStreamId(String streamId) {
+		this.streamId = streamId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 }

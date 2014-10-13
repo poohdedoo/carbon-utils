@@ -38,6 +38,20 @@ public final class LoggingConstants {
     public static final String LOG_MEMORY_PATTERN = "log.memory.pattern";
     public static final String MEMORY_APPENDER = "MemoryAppender";
 
+    public static final String DEFAULT_VERSION ="1.0.0";
+    
+    public static final String TENANT_ID = "tenantID";
+	public static final String SERVER_NAME = "serverName";
+	public static final String APP_NAME = "appName";
+	public static final String LOG_TIME = "logTime";
+	public static final String PRIORITY = "priority";
+	public static final String MESSAGE = "message";
+	public static final String LOGGER = "logger";
+	public static final String IP = "ip";
+	public static final String INSTANCE = "instance";
+	public static final String STACKTRACE = "stacktrace";
+	
+	
     // global system settings
     public static final String SYSTEM_LOG_LEVEL = "wso2carbon.system.log.level";
     public static final String SYSTEM_LOG_PATTERN = "wso2carbon.system.log.pattern";
